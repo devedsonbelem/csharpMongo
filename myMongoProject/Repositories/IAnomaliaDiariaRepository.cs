@@ -5,22 +5,26 @@ namespace myMongoProject.Repositories
     public interface IAnomaliaDiariaRepository
     {
         #region Propriedades
+
+        public Task<IEnumerable<AnomaliaDiariaEntity>> FindAllAsync();
+
         public Task<(int count, int prioridade)> ObterMinimoPrioridadeAnomaliasRotaAsync(
         string numeroViagem);
+
         public Task<Response> AtualizarListaAsync(List<AnomaliaDiariaEntity> listaAnomaliaDiariaEntity);
-        public Task<AnomaliaDiariaEntity> ObterPorIdAsync(
-            string idAnomaliaDiaria);
+
+        public Task<AnomaliaDiariaEntity> ObterPorIdAsync(string idAnomaliaDiaria);
 
         public Task<List<AnomaliaDiariaEntity>> ObterListaPorNumeroViagemAsync(string numeroViagem);
 
         public Task<(int count, int prioridade)> ObterMinimoPrioridadeAnomaliasRota(string numeroViagem);
 
-        public Task<AnomaliaDiariaEntity> ObterPorNumeroViagemEPseudoIdMobileAsync(
-            string numeroViagem,
-            string pseudoIdMobileDiario);
+   
         public Task<List<AnomaliaDiariaEntity>> ObterListaPorNumeroViagemELatitudeELongitudeERaioAsync(string numeroViagem, AnomalyTypeDocument anomalyTypeEnum, double latitude, double longitude, int raio);
 
         public Task<AnomaliaDiariaEntity> ObterPorId(string idAnomaliaDiaria);
+
+        public Task<AnomaliaDiariaEntity> ObterCodigoAnomalia(int CodigoAnomalia);
 
         public Task<IEnumerable<AnomaliaDiariaEntity>> ObterListaPorFiltroAsync(
            AnomaliaDiariaEntity anomaliaRequest);
@@ -29,7 +33,6 @@ namespace myMongoProject.Repositories
             string numeroViagem,
             string idParadaAnomalia,
             AnomalyTypeDocument tipo);
-
 
         public Task<List<AnomaliaDiariaEntity>> ObterListaPorListaNumeroViagemAsync(
             List<string> listaNumeroViagem,
@@ -56,7 +59,6 @@ namespace myMongoProject.Repositories
 
         public Task<Response> InserirListaAsync(List<AnomaliaDiariaEntity> listaAnomaliaDiariaEntity);
 
-
         public Task<Response> AtualizarAsync(AnomaliaDiariaEntity listaAnomaliaDiariaEntity);
 
         public Task<AnomaliaDiariaEntity> ResetarStatusAsync(AnomaliaDiariaEntity anomaliaDiaria);
@@ -64,7 +66,6 @@ namespace myMongoProject.Repositories
         public Task<Response> ExcluirAsync(string idAnomaliaDiaria);
 
         public Task<List<AnomaliaDiariaEntity>> ObterListaPorNumeroViagemEVariasAnomaliaTipoEnumAsync(string numeroViagem, List<AnomalyTypeDocument> anomaliasTipoEnum);
-
 
         public Task<List<AnomaliaDiariaEntity>> ObterListaPorIdParadaAnomaliaEListaAnomaliaTipoEnum(string idParadaAnomalia, List<AnomalyTypeDocument> listaTAnomaliaipoEnum);
 

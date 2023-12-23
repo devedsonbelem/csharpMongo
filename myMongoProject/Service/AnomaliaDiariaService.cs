@@ -187,7 +187,6 @@ namespace myMongoProject.Service
             }
         }
  
-
         public async Task<List<AnomaliaDiariaEntity>> ObterListaPorNumeroViagemEAnomaliaTipoEnumAsync(string numeroViagem, AnomalyTypeDocument anomaliaTipoEnum)
         {
             try
@@ -288,7 +287,7 @@ namespace myMongoProject.Service
         {
             try
             {
-                anomaliaDiaria.StatusDiaria = AnomalyStatusTypeDocument.Pending;
+               // anomaliaDiaria.StatusDiaria = AnomalyStatusTypeDocument.Pendente;
                 anomaliaDiaria.UltimaData = DateTime.UtcNow;
 
                 var result = await _repository.ResetarStatusAsync(anomaliaDiaria);
@@ -307,6 +306,30 @@ namespace myMongoProject.Service
                 throw new ServiceException("Erro ao resetar status da anomalia.", ex);
             }
         }
+
+        public async Task<IEnumerable<AnomaliaDiariaEntity>> ListarTodosAsync()
+        {
+            return await _repository.FindAllAsync();
+        }
+
+
+        public async Task<AnomaliaDiariaEntity> ObterPorCodigoAnomalia(int CodigoAnomalia)
+        {
+            try
+            {
+                var anomalia = await _repository.ObterCodigoAnomalia(CodigoAnomalia);
+                if (anomalia == null)
+                {
+                    throw new NotFoundException("Anomalia não encontrada.");
+                }
+                return anomalia;
+            }
+            catch (Exception ex)
+            {
+                throw new ServiceException("Erro ao obter anomalia por ID.", ex);
+            }
+        }
+
 
         #endregion
     }

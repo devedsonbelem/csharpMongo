@@ -26,6 +26,13 @@ namespace myMongoProject.Controllers
             _logger = logger;
         }
 
+        [HttpGet("listar-todos")]
+        public async Task<ActionResult<IEnumerable<AnomaliaDiariaEntity>>> ListarTodos()
+        {
+            var resultados = await _service.ListarTodosAsync();
+            return Ok(resultados);
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<AnomaliaDiariaEntity>> ObterPorIdAsync(string id)
         {
@@ -44,7 +51,6 @@ namespace myMongoProject.Controllers
             }
         }
  
-
         [HttpPost("atualizar")]
         public async Task<ActionResult<Response>> AtualizarAsync([FromBody] AnomaliaDiariaEntity anomaliaDiariaEntity)
         {
@@ -135,8 +141,6 @@ namespace myMongoProject.Controllers
             }
         }
  
- 
-
         [HttpPost("resetar-status")]
         public async Task<ActionResult<AnomaliaDiariaEntity>> ResetarStatusAsync([FromBody] AnomaliaDiariaEntity anomaliaDiaria)
         {
@@ -155,8 +159,23 @@ namespace myMongoProject.Controllers
             }
         }
 
-
-
+        [HttpGet("{id}")]
+        public async Task<ActionResult<AnomaliaDiariaEntity>> ObterCodigoAnomaliaAsync(int codigoAnomalia)
+        {
+            try
+            {
+                var anomalia = await _service.ObterCodigoAnomaliaAsync(codigoAnomalia);
+                    return Ok(anomalia);
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (ServiceException ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
         #endregion
     }

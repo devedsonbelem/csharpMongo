@@ -24,6 +24,9 @@ namespace myMongoProject.Repositories
             _collection = database.GetCollection<AnomaliaDiariaEntity>("anomaliadiarias");
         }
 
+
+
+
         public async Task<AnomaliaDiariaEntity> ObterPorIdAsync(string idAnomaliaDiaria)
         {
             return await _collection.Find(a => a.Id == idAnomaliaDiaria).FirstOrDefaultAsync();
@@ -33,7 +36,6 @@ namespace myMongoProject.Repositories
         {
             return await _collection.Find(a => a.Viagem == numeroViagem).ToListAsync();
         }
-
 
         public async Task<Response> AtualizarListaAsync(List<AnomaliaDiariaEntity> listaAnomaliaDiariaEntity)
         {
@@ -71,14 +73,11 @@ namespace myMongoProject.Repositories
             }
         }
 
-
-
-
-
         public async Task<Response> InserirAsync(AnomaliaDiariaEntity anomaliaDiariaEntity)
         {
             try
             {
+ 
                 await _collection.InsertOneAsync(anomaliaDiariaEntity);
                 return new Response("Sucesso", "Anomalia inserida com sucesso.");
             }
@@ -87,7 +86,6 @@ namespace myMongoProject.Repositories
                 return new Response("Error", $"Erro ao inserir anomalia: {ex.Message}");
             }
         }
-
 
         public async Task<Response> InserirListaAsync(List<AnomaliaDiariaEntity> listaAnomaliaDiariaEntity)
         {
@@ -101,8 +99,6 @@ namespace myMongoProject.Repositories
                 return new Response("Error", $"Erro ao inserir anomalias: {ex.Message}");
             }
         }
-
-
 
         public async Task<List<AnomaliaDiariaEntity>> ObterListaPorIdParadaAnomaliaEListaAnomaliaTipoEnumAsync(string idParadaAnomalia, List<AnomalyTypeDocument> listaTAnomaliaipoEnum)
         {
@@ -123,7 +119,6 @@ namespace myMongoProject.Repositories
 
             return await _collection.Find(filter).ToListAsync();
         }
-
 
         public async Task<List<AnomaliaDiariaEntity>> ObterListaPorNumeroViagemEAnomaliaTipoEnumAsync(string numeroViagem, AnomalyTypeDocument anomaliaTipoEnum)
         {
@@ -198,7 +193,7 @@ namespace myMongoProject.Repositories
             return await _collection.Find(filter).FirstOrDefaultAsync();
         }
 
-        public async Task<AnomaliaDiariaEntity> ObterPorNumeroViagemEPseudoIdMobileAsync(string numeroViagem, string pseudoIdMobileDiario)
+        public async Task<AnomaliaDiariaEntity> ObterPorNumeroViagemEPseudoIdMobileAsync(string numeroViagem, int pseudoIdMobileDiario)
         {
             var filter = Builders<AnomaliaDiariaEntity>.Filter.Where(anomalia =>
                 anomalia.Viagem == numeroViagem &&
@@ -211,13 +206,13 @@ namespace myMongoProject.Repositories
         public async Task<AnomaliaDiariaEntity> ResetarStatusAsync(AnomaliaDiariaEntity anomaliaDiaria)
         {
 
-            anomaliaDiaria.StatusDiaria = AnomalyStatusTypeDocument.Pending;
+            //anomaliaDiaria.StatusDiaria = AnomalyStatusTypeDocument.Pendente;
             anomaliaDiaria.UltimaData = DateTime.UtcNow;
 
             var filter = Builders<AnomaliaDiariaEntity>.Filter.Eq(anomalia => anomalia.Id, anomaliaDiaria.Id);
 
             var update = Builders<AnomaliaDiariaEntity>.Update
-                .Set(anomalia => anomalia.StatusDiaria, AnomalyStatusTypeDocument.Pending)
+              //  .Set(anomalia => anomalia.StatusDiaria, AnomalyStatusTypeDocument.Pendente)
                 .Set(anomalia => anomalia.UltimaData, DateTime.UtcNow);
 
             var options = new FindOneAndUpdateOptions<AnomaliaDiariaEntity>
@@ -227,7 +222,6 @@ namespace myMongoProject.Repositories
 
             return await _collection.FindOneAndUpdateAsync(filter, update, options);
         }
-
 
         public async Task<IEnumerable<AnomaliaDiariaEntity>> ObterListaPorFiltroAsync(AnomaliaDiariaEntity anomaliaRequest)
         {
@@ -271,8 +265,6 @@ namespace myMongoProject.Repositories
             return await _collection.Find(filter).ToListAsync();
         }
 
-
-
         public async Task<List<AnomaliaDiariaEntity>> ObterListaPorNumeroViagemELatitudeELongitudeERaioAsync(string numeroViagem, AnomalyTypeDocument anomalyTypeEnum, double latitude, double longitude, int raio, AnomaliaDiariaEntity anomalia)
         {
             // Converte o raio de metros para graus (aproximadamente)
@@ -299,9 +291,6 @@ namespace myMongoProject.Repositories
             return await _collection.Find(filtroCombinado).ToListAsync();
         }
 
-
-
-
         public async Task<(int count, int prioridade)> ObterMinimoPrioridadeAnomaliasRotaAsync(string numeroViagem)
         {
             var filter = Builders<AnomaliaDiariaEntity>.Filter.Eq(anomalia => anomalia.Viagem, numeroViagem);
@@ -312,13 +301,12 @@ namespace myMongoProject.Repositories
             return result != null ? (1, (int)result.PrioridadeAnomalia) : (0, 0);
         }
 
-
-
         public async Task<List<AnomaliaDiariaEntity>> ObterListaAnomaliaTratativaPorNumeroViagemAsync(string numeroViagem)
         {
             var filter = Builders<AnomaliaDiariaEntity>.Filter.Eq(anomalia => anomalia.Viagem, numeroViagem);
             return await _collection.Find(filter).ToListAsync();
         }
+
         public async Task<Response> AtualizarAsync(AnomaliaDiariaEntity anomaliaDiariaEntity)
         {
             try
@@ -363,9 +351,19 @@ namespace myMongoProject.Repositories
             }
         }
 
+        public async Task<IEnumerable<AnomaliaDiariaEntity>> FindAllAsync()
+        {
+            var anomalias = await _collection.Find(_ => true).ToListAsync();
+            return anomalias;
+        }
 
+       
 
-
+        public async Task<AnomaliaDiariaEntity> ObterCodigoAnomalia(int CodigoAnomalia)
+        { 
+        var filtro = Builders<AnomaliaDiariaEntity>.Filter.Eq(a => a.CodigoAnomalia,  CodigoAnomalia);
+            return await _collection.Find(filtro).FirstOrDefaultAsync();
+        }
 
         #endregion
     }

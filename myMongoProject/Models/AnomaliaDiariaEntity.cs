@@ -10,6 +10,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
 using System.Reflection.Metadata;
 using System.Diagnostics;
+using System.ComponentModel;
 
 namespace myMongoProject.Models
 {
@@ -20,94 +21,50 @@ namespace myMongoProject.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-         
-
         [BsonElement("DataAnomalia")]
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
-        public DateTime? DataAnomalia { get; set; }
-
-        [BsonIgnore]
+        public DateTime? DataAnomalia { get; set; } 
         public string PseudoIdMobileDiario { get; set; }
- 
         public string Viagem { get; set; }
-
         public int CodigoAnomalia { get; set; }
         public string PrioridadeAnomaliaEditada { get; set; }
-
         public string StatusAnomaliaEditado { get; set; }
-
         public string TipoAnomaliaEditado { get; set; }
-
         [JsonConverter(typeof(StringEnumConverter))]
         public PriorityTypeDocument PrioridadeAnomalia { get; set; }
-
-
-        [JsonConverter(typeof(StringEnumConverter))]
-        public AnomalyStatusTypeDocument StatusDiaria { get; set; }
-
-
+        public string StatusDiaria { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public AnomalyTypeDocument TipoAnomalia { get; set; }
-
         public string Placa { get; set; }
-
         public string TipoOperacao { get; set; }
-
         public string CodigoCliente { get; set; }
-
         public string NomeCliente { get; set; }
-
         public string ContatoComercial { get; set; }
-
         [BsonIgnore]
         public string TemChat { get; set; }
-
         public string IdChat { get; set; }
-
         public string NomeChat { get; set; }
-
         public string TopicoId { get; set; }
-
         public string IdTransportadora { get; set; }
-
         public string Transportadora { get; set; }
-
         public string IdUsuarioFiltro { get; set; }
-
         public string NomeUsuarioFiltro { get; set; }
-
         public string NomeFiltro { get; set; }
-
-
         public string TelefoneUsuario { get; set; }
-
         public string CpfMotorista { get; set; }
-
         public string MotoristaCodigo { get; set; }
-
         public string NomeMotorista { get; set; }
-
         public string TelefoneMotorista { get; set; }
-
         public string Rastreador { get; set; }
-
         public string Gprs { get; set; }
-
         public string IdTratativa { get; set; }
-
         public string Tratativa { get; set; }
-
         [BsonElement("DataDiaria ")]
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime? DataDiaria { get; set; }
-
-
         public string EnvioAprovacao { get; set; }
-
         public string Motivo { get; set; }
-
         public string SubMotivo { get; set; }
-
         public string AreaResponsavel { get; set; }
 
         public string ClienteResponsavel { get; set; }
@@ -116,28 +73,22 @@ namespace myMongoProject.Models
 
         public string AprovacaoViagem { get; set; }
 
-        public DateTime TempoDiaria { get; set; }
+        public string TempoDiaria { get; set; }
 
         public double PesoCarga { get; set; }
 
-
         public string Entrega { get; set; }
 
-
         public string IdParadaAnomalia { get; set; }
-
 
         [BsonElement("LocalAnomalia")]
         public EnderecoDocument LocalAnomalia { get; set; }
 
         public IEnumerable<TratativaDocument> Tratativas { get; set; }
 
-
         [BsonElement("DataSaida")]
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime? DataSaida { get; set; }
-
-
 
         [BsonElement("DataPrevisaoChegada")]
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
@@ -147,14 +98,12 @@ namespace myMongoProject.Models
         [BsonDateTimeOptions(Kind = DateTimeKind.Local, Representation = BsonType.String)]
         public DateTime UltimaData { get; set; }
 
-        public AnomaliaDiariaEntity()
-        {
-        }
-
         public AnomaliaDiariaEntity(string viagem)
         {
             Viagem = viagem;
         }
+
+       
 
         public AnomaliaDiariaEntity(string idAnomaliaDiaria, string viagem, string placa)
         {
@@ -298,8 +247,6 @@ namespace myMongoProject.Models
 
         public DateTime DtValidade { get; set; }
 
-        public AnomalyStatusTypeDocument Status { get; set; }
-
         [JsonConverter(typeof(StringEnumConverter))]
         public TreatrativeStandbyTypeDocument? RevisarEm { get; set; }
 
@@ -374,14 +321,7 @@ namespace myMongoProject.Models
         ProgramacaoDRPCustomer = 8,
         UPS = 9
     }
-    public enum AnomalyStatusTypeDocument
-    {
-        Pending = 0,
-        InTransit = 1,
-        Standby = 2,
-        Done = 3
-
-    }
+   
 
 
     public enum AnomalyTypeDocument
