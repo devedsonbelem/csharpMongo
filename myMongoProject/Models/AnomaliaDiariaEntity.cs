@@ -18,23 +18,29 @@ namespace myMongoProject.Models
     public class AnomaliaDiariaEntity  
     {
         #region Propriedades
+
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
+
         [BsonElement("DataAnomalia")]
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime? DataAnomalia { get; set; } 
+
         public string PseudoIdMobileDiario { get; set; }
         public string Viagem { get; set; }
         public int CodigoAnomalia { get; set; }
         public string PrioridadeAnomaliaEditada { get; set; }
         public string StatusAnomaliaEditado { get; set; }
         public string TipoAnomaliaEditado { get; set; }
-        [JsonConverter(typeof(StringEnumConverter))]
+ 
         public PriorityTypeDocument PrioridadeAnomalia { get; set; }
+
         public string StatusDiaria { get; set; }
-        [JsonConverter(typeof(StringEnumConverter))]
+
+        
         public AnomalyTypeDocument TipoAnomalia { get; set; }
+
         public string Placa { get; set; }
         public string TipoOperacao { get; set; }
         public string CodigoCliente { get; set; }
@@ -59,26 +65,21 @@ namespace myMongoProject.Models
         public string Gprs { get; set; }
         public string IdTratativa { get; set; }
         public string Tratativa { get; set; }
+
         [BsonElement("DataDiaria ")]
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime? DataDiaria { get; set; }
+
         public string EnvioAprovacao { get; set; }
         public string Motivo { get; set; }
         public string SubMotivo { get; set; }
         public string AreaResponsavel { get; set; }
-
         public string ClienteResponsavel { get; set; }
-
         public string Justificativa { get; set; }
-
         public string AprovacaoViagem { get; set; }
-
         public string TempoDiaria { get; set; }
-
         public double PesoCarga { get; set; }
-
         public string Entrega { get; set; }
-
         public string IdParadaAnomalia { get; set; }
 
         [BsonElement("LocalAnomalia")]
@@ -89,14 +90,22 @@ namespace myMongoProject.Models
         [BsonElement("DataSaida")]
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime? DataSaida { get; set; }
-
+        
         [BsonElement("DataPrevisaoChegada")]
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime? DataPrevisaoChegada { get; set; }
-
+        
         [BsonElement("ultimaData")]
         [BsonDateTimeOptions(Kind = DateTimeKind.Local, Representation = BsonType.String)]
         public DateTime UltimaData { get; set; }
+
+        public IFormFile Arquivo { get; set; }
+
+
+
+
+        public AnomaliaDiariaEntity() { }
+
 
         public AnomaliaDiariaEntity(string viagem)
         {

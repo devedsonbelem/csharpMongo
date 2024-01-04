@@ -271,17 +271,17 @@ namespace myMongoProject.Service
             }
         }
 
-        public async Task<AnomaliaDiariaEntity> ObterPorNumeroViagemEPseudoIdMobileAsync(string numeroViagem, string pseudoIdMobileDiario)
-        {
-            try
-            {
-                return await _repository.ObterPorNumeroViagemEPseudoIdMobileAsync(numeroViagem, pseudoIdMobileDiario);
-            }
-            catch (Exception ex)
-            {
-                throw new ServiceException("Erro ao obter a anomalia por número de viagem e pseudo ID mobile.", ex);
-            }
-        }
+    //    public async Task<AnomaliaDiariaEntity> ObterPorNumeroViagemEPseudoIdMobileAsync(string numeroViagem, string pseudoIdMobileDiario)
+     //   {
+      //      try
+        //    {
+       ////         return await _repository.ObterPorNumeroViagemEPseudoIdMobileAsync(numeroViagem, pseudoIdMobileDiario);
+      //      }
+       //     catch (Exception ex)
+        //    {
+       //         throw new ServiceException("Erro ao obter a anomalia por número de viagem e pseudo ID mobile.", ex);
+          //  }
+       // }
 
         public async Task<AnomaliaDiariaEntity> ResetarStatusAsync(AnomaliaDiariaEntity anomaliaDiaria)
         {
@@ -328,6 +328,11 @@ namespace myMongoProject.Service
             {
                 throw new ServiceException("Erro ao obter anomalia por ID.", ex);
             }
+        }
+
+        public Task<AnomaliaDiariaEntity> ObterCodigoAnomaliaAsync(int CodigoAnomalia)
+        {
+            throw new NotImplementedException();
         }
 
 

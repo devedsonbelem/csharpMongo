@@ -10,6 +10,9 @@ using myMongoProject.Models;
 using myMongoProject.Service;
 using myMongoProject.Exceptions;
 using myMongoProject.Dto;
+using System.Net;
+using System.Text;
+using Newtonsoft.Json;
 namespace myMongoProject.Controllers
 {
 
@@ -87,6 +90,7 @@ namespace myMongoProject.Controllers
             }
         }
 
+
         [HttpDelete("{id}")]
         public async Task<ActionResult<Response>> ExcluirAsync(string id)
         {
@@ -105,6 +109,8 @@ namespace myMongoProject.Controllers
             }
         }
 
+
+
         [HttpPost("inserir")]
         public async Task<ActionResult<Response>> InserirAsync([FromBody] AnomaliaDiariaEntity anomaliaDiariaEntity)
         {
@@ -122,6 +128,7 @@ namespace myMongoProject.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
 
         [HttpPost("inserir-lista")]
         public async Task<ActionResult<Response>> InserirListaAsync([FromBody] List<AnomaliaDiariaEntity> listaAnomaliaDiariaEntity)

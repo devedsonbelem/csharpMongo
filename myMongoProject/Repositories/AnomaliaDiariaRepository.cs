@@ -193,15 +193,15 @@ namespace myMongoProject.Repositories
             return await _collection.Find(filter).FirstOrDefaultAsync();
         }
 
-        public async Task<AnomaliaDiariaEntity> ObterPorNumeroViagemEPseudoIdMobileAsync(string numeroViagem, int pseudoIdMobileDiario)
-        {
-            var filter = Builders<AnomaliaDiariaEntity>.Filter.Where(anomalia =>
-                anomalia.Viagem == numeroViagem &&
-                anomalia.PseudoIdMobileDiario == pseudoIdMobileDiario
-            );
+      //  public async Task<AnomaliaDiariaEntity> ObterPorNumeroViagemEPseudoIdMobileAsync(string numeroViagem, int pseudoIdMobileDiario)
+      //  {var filter = Builders<AnomaliaDiariaEntity>.Filter.Where(anomalia =>
+       ///         anomalia.Viagem === numeroViagem &&
+      //          anomalia.PseudoIdMobileDiario === pseudoIdMobileDiario
+       //     );
 
-            return await _collection.Find(filter).FirstOrDefaultAsync();
-        }
+            
+       //     return await _collection.Find(filter).FirstOrDefaultAsync();
+      //  }
 
         public async Task<AnomaliaDiariaEntity> ResetarStatusAsync(AnomaliaDiariaEntity anomaliaDiaria)
         {

@@ -12,8 +12,6 @@ namespace myMongoProject.Service
         #region Propriedades
 
         Task<IEnumerable<AnomaliaDiariaEntity>> ListarTodosAsync();
-
-
         Task<AnomaliaDiariaEntity> ObterPorIdAsync(string idAnomaliaDiaria);
         Task<Response> AtualizarAsync(AnomaliaDiariaEntity anomaliaDiariaEntity);
         Task<Response> AtualizarListaAsync(List<AnomaliaDiariaEntity> listaAnomaliaDiariaEntity);
@@ -27,7 +25,7 @@ namespace myMongoProject.Service
         Task<List<AnomaliaDiariaEntity>> ObterListaPorNumeroViagemEListaAnomaliaTipoEnumAsync(string numeroViagem, List<AnomalyTypeDocument> listaTipos);
         Task<List<AnomaliaDiariaEntity>> ObterListaPorNumeroViagemEVariasAnomaliaTipoEnumAsync(string numeroViagem, List<AnomalyTypeDocument> anomaliasTipoEnum);
         Task<(int count, int prioridade)> ObterMinimoPrioridadeAnomaliasRotaAsync(string numeroViagem);
-        Task<AnomaliaDiariaEntity> ObterPorNumeroViagemEPseudoIdMobileAsync(string numeroViagem, string pseudoIdMobileDiario);
+        //Task<AnomaliaDiariaEntity> ObterPorNumeroViagemEPseudoIdMobileAsync(string numeroViagem, string pseudoIdMobileDiario);
         Task<AnomaliaDiariaEntity> ResetarStatusAsync(AnomaliaDiariaEntity anomaliaDiaria);
 
         Task<AnomaliaDiariaEntity> ObterCodigoAnomaliaAsync(int CodigoAnomalia);
