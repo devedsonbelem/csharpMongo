@@ -4,7 +4,14 @@ using myMongoProject.Service;
 var builder = WebApplication.CreateBuilder(args);
 
  
+ 
 builder.Services.AddControllers();
+builder.Services.AddScoped<IHistoricoViagemRepository, HistoricoViagemRepository>();
+builder.Services.AddScoped<IHistoricoViagemService, HistoricoViagemService>();
+
+builder.Services.AddScoped<IEnvioInformacoesDiariasRepository, EnvioInformacoesDiariasRepository>();
+builder.Services.AddScoped<IEnvioInformacoesDiariasService, EnvioInformacoesDiariasService>();
+
 builder.Services.AddScoped<IAnomaliaDiariaRepository, AnomaliaDiariaRepository>();
 builder.Services.AddScoped<IAnomaliaDiariaService, AnomaliaDiariaService>();
 

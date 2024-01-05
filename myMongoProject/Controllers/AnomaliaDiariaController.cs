@@ -53,7 +53,7 @@ namespace myMongoProject.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
- 
+
         [HttpPost("atualizar")]
         public async Task<ActionResult<Response>> AtualizarAsync([FromBody] AnomaliaDiariaEntity anomaliaDiariaEntity)
         {
